@@ -1,0 +1,771 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script>document.documentElement.classList.add('js')</script>
+<title>Арбитраж под ключ — ИИ-агенты для арбитража криптовалют | ArbitrageScanner</title>
+<meta name="description" content="Готовая система автоарбитража на вашем сервере: ИИ-агенты открывают и закрывают сделки 24/7 на данных нашего API. Код ваш по договору, ключи от бирж остаются у вас. Запуск за 7 дней.">
+<meta property="og:title" content="Арбитраж под ключ — ИИ-агенты ArbitrageScanner">
+<meta property="og:description" content="Открывай сделки ИИ-агентами, а не руками. Код ваш, ключи у вас, запуск за 7 дней.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="img/agents/team.webp">
+<meta name="theme-color" content="#2d6bf6">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="img/as-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Иконки -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-out" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-tg" viewBox="0 0 24 24"><path d="M21.94 4.3 18.7 19.6c-.24 1.07-.88 1.34-1.78.83l-4.93-3.63-2.38 2.29c-.26.26-.48.48-.99.48l.35-5.02 9.13-8.25c.4-.35-.09-.55-.62-.2L6.2 13.2l-4.86-1.52c-1.06-.33-1.08-1.06.22-1.57L20.6 2.77c.88-.32 1.65.2 1.34 1.53z"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="m8 7-5 5 5 5m8-10 5 5-5 5m-3-13-2 16" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5" stroke-linejoin="round"/></symbol>
+  <symbol id="i-chip" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4m6-4v4M9 18v4m6-4v4M2 9h4m-4 6h4m12-6h4m-4 6h4" stroke-linecap="round"/></symbol>
+  <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="m11 12 9-9m-3 3 3 3m-6 0 2 2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-server" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01" stroke-linecap="round" stroke-width="2.6"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2" stroke-linecap="round"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z" stroke-linejoin="round"/></symbol>
+  <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h13v4M3 7v11a2 2 0 0 0 2 2h15V9H5a2 2 0 0 1-2-2Z" stroke-linejoin="round"/><path d="M16 14.5h.01" stroke-width="2.6" stroke-linecap="round"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke-linecap="round"/></symbol>
+  <symbol id="i-plug" viewBox="0 0 24 24"><path d="M9 2v5m6-5v5M6 7h12v4a6 6 0 0 1-12 0V7Zm6 10v5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-swap" viewBox="0 0 24 24"><path d="M4 8h14m-4-4 4 4-4 4M20 16H6m4-4-4 4 4 4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5h.01" stroke-linecap="round" stroke-width="2"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" stroke-linecap="round"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2.8 2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2l-5.6 3 1.1-6.3-4.6-4.4 6.3-.9L12 2.8Z"/></symbol>
+  <symbol id="i-crown" viewBox="0 0 24 24"><path d="m3 7 4.5 4L12 4l4.5 7L21 7l-2 12H5L3 7Z"/></symbol>
+  <symbol id="i-verified" viewBox="0 0 24 24"><path d="m12 1.5 2.6 2 3.2-.2.9 3.1 2.7 1.8-1.2 3 1.2 3-2.7 1.8-.9 3.1-3.2-.2-2.6 2-2.6-2-3.2.2-.9-3.1-2.7-1.8 1.2-3-1.2-3 2.7-1.8.9-3.1 3.2.2L12 1.5Zm-1.2 13.7 5.6-5.6-1.3-1.3-4.3 4.3-2-2-1.3 1.3 3.3 3.3Z"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5-13-7.5Z"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M6 4h4v16H6zm8 0h4v16h-4z"/></symbol>
+  <symbol id="i-replay" viewBox="0 0 24 24"><path d="M12 5V1.5L7 6l5 4.5V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7Z"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4V5Z" stroke-linejoin="round"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M8 3v4m8-4v4M3.5 10h17" stroke-linecap="round"/></symbol>
+  <symbol id="i-trend" viewBox="0 0 24 24"><path d="m3 17 6-6 4 4 8-8m-5 0h5v5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<!-- Сайдбар сайта -->
+<aside class="as-sidebar" id="asSidebar" aria-label="Меню ArbitrageScanner">
+  <a class="as-logo" href="https://arbitragescanner.io/ru" target="_blank" rel="noopener"><img src="img/as-logo.png" alt="Arbitrage Scanner"></a>
+  <nav class="as-nav">
+    <a href="https://arbitragescanner.io/ru" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v11h-6v-7H9v7H3Z"/></svg><span>Главная</span></a>
+    <a href="https://arbitragescanner.io/ru/plans" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 8-3 8h18s-3-1-3-8M10 21h4"/></svg><span>Тарифы</span></a>
+    <details class="as-group"><summary><svg viewBox="0 0 24 24"><path d="M3 8V3h5m8 0h5v5M3 16v5h5m8 0h5v-5"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg><span>Арбитражные продукты</span><span class="as-chev">⌄</span></summary>
+      <div>
+        <a href="https://arbitragescanner.io/about-screener" target="_blank" rel="noopener">Арбитражный скринер</a>
+        <a href="https://arbitragescanner.io/about-perp-screener" target="_blank" rel="noopener">Arbitrage Perpetuals 🔥</a>
+        <a href="https://arbitragescanner.io/funding-rates" target="_blank" rel="noopener">Ставки фандинга</a>
+        <a href="https://arbitragescanner.io/about-scanner" target="_blank" rel="noopener">Арбитражный сканер</a>
+        <a href="https://arbitragescanner.io/about-dex-scanner" target="_blank" rel="noopener">DEX-сканер</a>
+        <a href="https://arbitragescanner.io/futures-spread-calculator" target="_blank" rel="noopener">Калькулятор спредов</a>
+        <a href="https://arbitragescanner.io/exchanges-review" target="_blank" rel="noopener">Поддерживаемые биржи</a>
+      </div>
+    </details>
+    <a href="https://arbitragescanner.io/new-crypto-listings" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M8 2v6m8-6v6M4 11h16"/></svg><span>Календарь листингов</span></a>
+    <a href="https://arbitragescanner.io/ai" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="14" rx="4"/><path d="M12 2v4M8 11v3m8-3v3M9 17h6M1 10v6m22-6v6"/></svg><span>ИИ Ассистент</span></a>
+    <a href="#top" class="is-active" aria-current="page"><svg viewBox="0 0 24 24"><path d="M3 3h7v7H3zm11 0h7v7h-7zM3 14h7v7H3zm11 0h7v7h-7z"/></svg><span>ИИ агенты</span><sup>New</sup></a>
+    <details class="as-group"><summary><svg viewBox="0 0 24 24"><path d="M3 4h18v6H3zm0 10h8v7H3zm13 0h5v7h-5z"/></svg><span>Обучения/кейсы</span><span class="as-chev">⌄</span></summary>
+      <div>
+        <a href="https://arbitragescanner.io/blog" target="_blank" rel="noopener">Блог</a>
+        <a href="https://arbitragescanner.io/tutorials" target="_blank" rel="noopener">Обучение</a>
+        <a href="https://arbitragescanner.io/cases/screener" target="_blank" rel="noopener">Кейсы</a>
+        <a href="https://arbitragescanner.io/guides" target="_blank" rel="noopener">Гайды</a>
+      </div>
+    </details>
+    <a href="https://arbitragescanner.io/crypto-api" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="m7 7-5 5 5 5m10-10 5 5-5 5m-4-14-2 18"/></svg><span>Крипто API</span><sup>New</sup></a>
+    <a href="https://arbitragescanner.io/white-label-arbitrage" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="m8 3 8 0-2 5 5 6v5a7 3 0 0 1-14 0v-5l5-6Zm1 5h6"/></svg><span>White Label</span></a>
+    <a href="https://arbitragescanner.io/partners" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="3"/><path d="M2 21v-4a7 7 0 0 1 14 0v4M17 4a3 3 0 0 1 0 6m1 4a5 5 0 0 1 4 5v2"/></svg><span>Партнёрская программа</span></a>
+  </nav>
+  <div class="as-page-links">
+    <a href="#simulation">Посмотреть сделку агента →</a>
+    <a href="#results">Результаты агентов</a>
+    <a href="#pricing">Тарифы и цены</a>
+    <a href="https://t.me/arbitrage_scanner_support_bot" target="_blank" rel="noopener">Поддержка в Telegram ↗</a>
+  </div>
+</aside>
+<div class="as-scrim" id="asScrim"></div>
+
+<header class="as-topbar">
+  <button class="as-burger" id="asBurger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="asSidebar"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/></svg></button>
+  <a class="as-top-logo" href="https://arbitragescanner.io/ru" target="_blank" rel="noopener"><img src="img/as-logo.png" alt="Arbitrage Scanner"></a>
+  <span class="as-crumb">ИИ агенты · Арбитраж под ключ</span>
+  <nav class="as-anchors" aria-label="Разделы страницы">
+    <a href="#how">Как это работает</a>
+    <a href="#simulation">Сделка</a>
+    <a href="#results">Результаты</a>
+    <a href="#pricing">Тарифы</a>
+    <a href="#strategies">Стратегии</a>
+    <a href="#reviews">Отзывы</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+  <div class="as-actions">
+    <a class="as-btn" href="https://arbitragescanner.io/auth/register" target="_blank" rel="noopener">Регистрация</a>
+    <a class="as-btn primary" href="https://arbitragescanner.io/auth/login" target="_blank" rel="noopener">Вход</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- 1. HERO -->
+<section class="hero">
+  <div class="hero-copy">
+    <div class="badge"><i></i>Арбитраж под ключ</div>
+    <h1>Открывай сделки <span class="nw">ИИ-агентами,</span> <span class="accent">а не руками.</span></h1>
+    <ul class="hero-points">
+      <li><span class="hp-ico"><svg><use href="#i-code"/></svg></span><p><b>Без разработки.</b> Арбитраж под ключ — это когда вам не нужно ни разбираться в коде, ни сидеть у монитора, ни нанимать разработчика. Мы берём и разворачиваем для вас работающую систему.</p></li>
+      <li><span class="hp-ico"><svg><use href="#i-layers"/></svg></span><p><b>Всё в одном месте.</b> Система круглосуточно отслеживает разницу цен между биржами, фильтрует связки по вашим критериям, арбитражит сама и ведёт отчётность.</p></li>
+      <li><span class="hp-ico"><svg><use href="#i-chip"/></svg></span><p><b>Уникальный продукт.</b> Всё построено на нашем собственном API, который уже больше 5 лет обрабатывает данные с десятков бирж и работает с ними напрямую.</p></li>
+    </ul>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="https://t.me/arbitrage_scanner_support_bot" target="_blank" rel="noopener"><svg><use href="#i-chat"/></svg>Задать вопрос</a>
+      <a class="btn btn-green" href="https://t.me/arbitrage_scanner_support_bot" target="_blank" rel="noopener"><svg><use href="#i-calendar"/></svg>Записаться на демо</a>
+    </div>
+  </div>
+
+  <div class="mission" aria-label="Пример работы агента Nexus">
+    <div class="mission-top"><span>◈ NEXUS / СХЕМА ИСПОЛНЕНИЯ</span><a href="#simulation">КАК РАБОТАЕТ СТРАТЕГИЯ</a></div>
+    <div class="mission-chart">
+      <div class="mc-head">
+        <div><span class="mc-label">Условный P&amp;L · повтор за 30 дней</span><strong class="mc-pnl" id="heroPnl">+$0.00</strong></div>
+        <div class="mc-right"><span class="mc-ret" id="heroReturn">+0.00%</span><small>Условный капитал: $10 000</small><button class="mc-btn" id="heroPause" type="button">Пауза</button></div>
+      </div>
+      <svg id="heroChart" viewBox="0 0 740 160" preserveAspectRatio="none" role="img" aria-label="Анимированный график P&amp;L агента">
+        <defs><linearGradient id="heroFill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#2d6bf6" stop-opacity=".28"/><stop offset="1" stop-color="#2d6bf6" stop-opacity="0"/></linearGradient><filter id="heroGlow"><feGaussianBlur stdDeviation="3"/></filter></defs>
+        <path d="M0 35H740M0 75H740M0 115H740M80 0V160M210 0V160M340 0V160M470 0V160M600 0V160" stroke="#758ba8" stroke-opacity=".14" stroke-dasharray="3 6"/>
+        <path id="heroArea" fill="url(#heroFill)"/>
+        <path id="heroLine" fill="none" stroke="#2d6bf6" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+        <circle id="heroHalo" r="9" fill="#2d6bf6" opacity=".22" filter="url(#heroGlow)"/>
+        <circle id="heroDot" r="4" fill="#2d6bf6"/>
+      </svg>
+      <div class="mc-foot"><span id="heroDay">ДЕНЬ 01 / 30</span><span id="heroTrades">СДЕЛОК: 0</span></div>
+    </div>
+    <div class="mission-body">
+      <div class="eyebrow">Один спред. Две позиции. Единый план.</div>
+      <h2>Следите за тем,<br>что делает ваш агент.</h2>
+      <div class="route">
+        <div><small>Цена ниже / биржа A</small><strong class="up">↑ Открыть лонг</strong></div>
+        <span class="route-swap"><svg><use href="#i-swap"/></svg></span>
+        <div><small>Цена выше / биржа B</small><strong class="dn">↓ Открыть шорт</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ul class="facts reveal">
+  <li><svg><use href="#i-code"/></svg><span><b>Код ваш</b>передаём по договору</span></li>
+  <li><svg><use href="#i-key"/></svg><span><b>Ключи у вас</b>доступа к средствам нет</span></li>
+  <li><svg><use href="#i-clock"/></svg><span><b>24/7</b>без вашего участия</span></li>
+  <li><svg><use href="#i-bolt"/></svg><span><b>Запуск за 7 дней</b>от оплаты до работы</span></li>
+</ul>
+
+<!-- 2. КАК ЭТО РАБОТАЕТ -->
+<section class="section" id="how">
+  <div class="sh center reveal">
+    <div class="eyebrow">Как это работает</div>
+    <h2>Что вы покупаете и как это работает</h2>
+    <p class="lead">Четыре шага от первого созвона до системы, которая работает без вас.</p>
+  </div>
+  <div class="steps">
+    <article class="step reveal"><div class="step-no"><span>01</span><i></i></div><h3>Разговор и честная оценка</h3><p>Всё начинается с разговора. Мы созваниваемся и разбираем вашу ситуацию: какой капитал в работе, на каких биржах есть аккаунты, какой риск приемлем. Здесь же честно говорим, подходит ли вам автоарбитраж — если капитал слишком мал для выбранной схемы или ожидания завышены, скажем сразу, а не после оплаты.</p></article>
+    <article class="step reveal"><div class="step-no"><span>02</span><i></i></div><h3>Стратегия под ваши вводные</h3><p>Спот-спот, спот-фьючерс, ставки финансирования — у каждой схемы свои требования к капиталу и скорости. Согласовываем конкретику: биржи, монеты, минимальный спред, максимальный объём на сделку. Стратегия для $5 000 и для $200 000 — это разные стратегии и подходы.</p></article>
+    <article class="step reveal"><div class="step-no"><span>03</span><i></i></div><h3>Сборка системы на нашем API</h3><p>Собираем систему на базе нашего API — того же потока данных, на котором больше 5 лет работают наши продукты с тысячами пользователей. Мы не арендуем данные у посредников и не парсим биржи на скорую руку: инфраструктура наша, и если что-то ломается, мы исправляем это сами. Система круглосуточно отслеживает разницу цен, фильтрует связки по вашим условиям и работает без вашего участия — спред держится секунды, человек за монитором столько бирж отследить не может.</p></article>
+    <article class="step reveal"><div class="step-no"><span>04</span><i></i></div><h3>Запуск, онбординг и связь дальше</h3><p>После запуска показываем, как всё устроено: где смотреть результаты, как менять настройки, что делать в нестандартных ситуациях. И остаёмся на связи — биржи меняют правила и комиссии, монеты убирают с торгов, рынок сжимается и расширяется, и наша система успевает за всем этим.</p></article>
+  </div>
+</section>
+
+<!-- 3. КОД ОСТАЁТСЯ У ВАС -->
+<section class="section" id="ownership">
+  <div class="own">
+    <div class="own-main reveal">
+      <div class="eyebrow">Ваша собственность</div>
+      <h2>Код остаётся у вас</h2>
+      <p class="lead">Вы покупаете готовый код — не подписку на чужой сервис и не доступ в чей-то кабинет, а работающую программу, которую мы отдаём вам целиком.</p>
+      <ul class="checks">
+        <li><span class="ck"><svg><use href="#i-check"/></svg></span><span>Система разворачивается на вашей стороне, ключи от бирж остаются у вас, и доступа к вашим средствам нет ни у кого, включая нас.</span></li>
+        <li><span class="ck"><svg><use href="#i-check"/></svg></span><span>Код содержит логику вашей стратегии, а данные о ценах и связках приходят от нашего API — вам не нужно поддерживать подключения к десяткам бирж.</span></li>
+        <li><span class="ck"><svg><use href="#i-check"/></svg></span><span>Когда биржа меняет протокол, это наша забота, а не ваша.</span></li>
+        <li><span class="ck"><svg><use href="#i-check"/></svg></span><span>Плюс поддержка: передать архив с кодом и пропасть — не то, за что имеет смысл платить. Помогаем развернуть, разбираемся, если что-то ведёт себя не так, и остаёмся на связи дальше.</span></li>
+      </ul>
+    </div>
+    <div class="where reveal">
+      <div class="where-head">
+        <h3>Что где лежит</h3>
+        <div class="where-legend"><span><i style="background:var(--green)"></i>у вас</span><span><i style="background:var(--blue)"></i>у нас</span></div>
+      </div>
+      <ul class="where-list">
+        <li class="w-you"><span class="w-ico"><svg><use href="#i-code"/></svg></span><div><b>Код системы</b><span>передаём по договору, разворачивается на вашем сервере</span></div><span class="w-tag">у вас</span></li>
+        <li class="w-you"><span class="w-ico"><svg><use href="#i-key"/></svg></span><div><b>API-ключи бирж</b><span>остаются в вашей инфраструктуре, нам не передаются</span></div><span class="w-tag">у вас</span></li>
+        <li class="w-you"><span class="w-ico"><svg><use href="#i-wallet"/></svg></span><div><b>Средства на биржах</b><span>распоряжаетесь только вы</span></div><span class="w-tag">у вас</span></li>
+        <li class="w-none"><span class="w-ico"><svg><use href="#i-lock"/></svg></span><div><b>Наш доступ к вашим деньгам</b><span>его нет: ни к аккаунтам, ни к балансу, ни к выводу</span></div><span class="w-tag">нет доступа</span></li>
+        <li class="w-us"><span class="w-ico"><svg><use href="#i-plug"/></svg></span><div><b>Работа с биржами</b><span>протоколы, лимиты и обновления держим мы</span></div><span class="w-tag">у нас</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 4. СИМУЛЯЦИЯ СДЕЛКИ -->
+<section class="section" id="simulation">
+  <div class="sh reveal">
+    <div class="eyebrow">Сделка агента в реальном времени</div>
+    <h2>Две биржи. Один спред. Итог +$380.</h2>
+    <p class="lead">Посмотрите, как агент находит расхождение цены TRC-USDT между Binance и Bybit, открывает лонг и шорт одинакового объёма и закрывает обе ноги, когда цены сходятся.</p>
+  </div>
+
+  <div class="sim reveal" id="sim">
+    <div class="sim-top">
+      <div class="sim-title">
+        <span class="live" id="simLive"><i></i><span>LIVE</span></span>
+        <div><h3>Nexus · межбиржевой арбитраж</h3><small>Лонг на дешёвой бирже + шорт на дорогой, 2 000 TRC в каждой ноге</small></div>
+      </div>
+      <div class="sim-ctrl">
+        <button class="icon-btn" id="simPlay" type="button"><svg><use href="#i-pause"/></svg><span>Пауза</span></button>
+        <button class="icon-btn" id="simReplay" type="button"><svg><use href="#i-replay"/></svg><span>Повтор</span></button>
+        <div class="seg" id="simSpeed" role="group" aria-label="Скорость">
+          <button type="button" data-speed="0.5">0.5×</button><button type="button" data-speed="1" class="is-on">1×</button><button type="button" data-speed="2">2×</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="signal">
+      <table>
+        <thead><tr><th>Валютная пара</th><th>Биржа для покупки</th><th>Биржа для продажи</th><th>Общая прибыль</th><th>Объём</th><th>Спред входа / выхода</th></tr></thead>
+        <tbody><tr id="sigRow">
+          <td data-l="Валютная пара"><div class="coin"><span class="coin-ico">T</span><div><b>TRC-USDT</b><small id="sigState">Поиск связки…</small></div></div></td>
+          <td data-l="Биржа для покупки"><a class="ex-link" href="#simulation">Binance ↗</a><span class="ex-price" id="sigBuy">$10.0000</span></td>
+          <td data-l="Биржа для продажи"><a class="ex-link" href="#simulation">Bybit ↗</a><span class="ex-price" id="sigSell">$10.0005</span></td>
+          <td data-l="Общая прибыль"><span class="pill muted" id="sigProfit">+0.00%</span></td>
+          <td class="vol" data-l="Объём"><b>2 000 TRC</b><small id="sigVol">$19 798</small></td>
+          <td class="spr" data-l="Спред входа / выхода"><span class="pos" id="sigIn">—</span> / <span id="sigOut">—</span></td>
+        </tr></tbody>
+      </table>
+    </div>
+
+    <div class="venues">
+      <div class="venue" data-venue="0">
+        <div class="v-head">
+          <div class="v-name"><span class="v-logo bn">B</span><div><b>BINANCE</b><small>TRC/USDT · 1m</small></div></div>
+          <div class="v-price"><b id="priceA">$10.0000</b><small id="chgA" class="pos">+0.00%</small></div>
+        </div>
+        <span class="side" id="sideA">СКАНИРОВАНИЕ</span>
+        <div class="v-body">
+          <div class="chart-box"><canvas id="chartA" aria-label="Свечной график Binance"></canvas></div>
+          <div class="book" id="bookA" aria-label="Стакан Binance"></div>
+        </div>
+        <div class="leg"><div><small>Вход (лонг)</small><b id="entryA">—</b></div><div><small>Объём</small><b>2 000 TRC</b></div><div><small>P&amp;L лонга</small><b id="pnlA">$0.00</b></div></div>
+      </div>
+      <div class="venue" data-venue="1">
+        <div class="v-head">
+          <div class="v-name"><span class="v-logo bb">BY</span><div><b>BYBIT</b><small>TRC/USDT · 1m</small></div></div>
+          <div class="v-price"><b id="priceB">$10.0005</b><small id="chgB" class="pos">+0.00%</small></div>
+        </div>
+        <span class="side" id="sideB">СКАНИРОВАНИЕ</span>
+        <div class="v-body">
+          <div class="chart-box"><canvas id="chartB" aria-label="Свечной график Bybit"></canvas></div>
+          <div class="book" id="bookB" aria-label="Стакан Bybit"></div>
+        </div>
+        <div class="leg"><div><small>Вход (шорт)</small><b id="entryB">—</b></div><div><small>Объём</small><b>2 000 TRC</b></div><div><small>P&amp;L шорта</small><b id="pnlB">$0.00</b></div></div>
+      </div>
+    </div>
+
+    <div class="status">
+      <div><small>Этап исполнения</small><strong id="stPhase">Поиск спреда</strong></div>
+      <div><small>Разница цен</small><strong id="stSpread">$0.0005</strong></div>
+      <div><small id="stPnlLabel">Нереализованный P&amp;L − комиссии входа</small><strong id="stPnl">$0.00</strong></div>
+    </div>
+    <div class="progress"><div id="simProgress"></div></div>
+
+    <div class="sim-bottom">
+      <div class="log-wrap">
+        <div class="phases" id="simPhases"><span>01 Найти спред</span><span>02 Открыть лонг и шорт</span><span>03 Дождаться схождения</span><span>04 Закрыть обе позиции</span></div>
+        <div class="log" id="simLog" aria-live="polite"></div>
+      </div>
+      <div class="result">
+        <h4>Итог сделки <span id="resState">в процессе</span></h4>
+        <div class="res-rows">
+          <div><span>Лонг Binance</span><b id="rLong">—</b></div>
+          <div><span>Шорт Bybit</span><b id="rShort">—</b></div>
+          <div><span>Комиссии (4 исполнения)</span><b id="rFee">—</b></div>
+          <div><span>Фандинг</span><b id="rFund">—</b></div>
+          <div class="total"><span>Итог по сделке</span><b id="rTotal">—</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="conclusion reveal" id="conclusion">
+    <span class="conclusion-ico"><svg><use href="#i-check"/></svg></span>
+    <div>
+      <h3>Вывод по сделке</h3>
+      <p>Сделка закрыта полностью в <b class="pos">+380$</b>. Лонг на бирже Binance закрылся в <b class="pos">+800$</b>. Шорт на бирже Bybit закрылся в <b class="neg">−410$</b>. Суммарная комиссия <b>10$</b>. Фандинг <b>0$</b>. Итог по сделке <b class="pos">+380$</b>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5. ПРОФИЛЬ АГЕНТА -->
+<section class="section" id="results">
+  <div class="sh reveal">
+    <div class="eyebrow">Отчётность агента</div>
+    <h2>Пример результатов <span class="nw">ИИ-агент</span>ов для арбитража</h2>
+    <p class="lead">Так выглядит дашборд агента: доходность, просадка, стратегии, токены, комиссии и каждая сделка с разбором по ногам.</p>
+  </div>
+  <div class="agent-tabs reveal" id="agentTabs" role="tablist" aria-label="Выбор агента"></div>
+  <div class="profile reveal" id="profile">
+    <div class="pf-head">
+      <img class="pf-ava" id="pfAva" src="img/agents/nexus-sm.webp" alt="">
+      <div>
+        <div class="pf-name"><h3 id="pfName">Nexus</h3><span class="verified"><svg><use href="#i-chip"/></svg>Пример отчёта агента</span></div>
+        <p class="pf-sub" id="pfSub"></p>
+        <div class="tags" id="pfTags"></div>
+      </div>
+      <div class="pf-cta">
+        <div><small id="pfRoiLabel">ROI за 30 дней</small><b id="pfRoi">+0.00%</b></div>
+        <a class="btn btn-primary" href="https://t.me/arbitrage_scanner_support_bot" target="_blank" rel="noopener"><svg><use href="#i-tg"/></svg>Подключить агента</a>
+      </div>
+    </div>
+    <div class="pf-bar">
+      <div class="seg" id="pfPeriod" role="group" aria-label="Период">
+        <button type="button" data-p="7">7Д</button><button type="button" data-p="30" class="is-on">30Д</button><button type="button" data-p="90">90Д</button><button type="button" data-p="180">180Д</button>
+      </div>
+      <div class="pf-bar-meta" id="pfMeta"></div>
+    </div>
+    <div class="kpis" id="pfKpis"></div>
+    <div class="pf-grid">
+      <div class="pf-chart">
+        <div class="pf-chart-h"><h4>Доходность</h4><div class="seg" id="pfMode" role="group" aria-label="Показатель"><button type="button" data-m="roi" class="is-on">ROI, %</button><button type="button" data-m="pnl">P&amp;L, $</button></div></div>
+        <div class="chart-wrap" id="pfChart"><div class="chart-tip" id="pfTip"></div></div>
+      </div>
+      <div class="pf-side">
+        <div><h4>Прибыль по стратегиям</h4><div class="donut-wrap" id="pfStrat"></div></div>
+        <div><h4>Предпочтение токенов</h4><div class="bars" id="pfTokens"></div></div>
+        <div><h4>Подключённые биржи</h4><div class="ex-chips" id="pfEx"></div></div>
+      </div>
+    </div>
+    <div class="pf-trades">
+      <div class="pf-trades-h"><h4>Последние сделки</h4><small id="pfTradesNote"></small></div>
+      <div class="tbl-scroll"><table class="trades"><thead><tr><th>Закрыта</th><th>Пара · стратегия</th><th>Связка</th><th class="r">Спред</th><th class="r">Объём</th><th class="r">Комиссия</th><th class="r">Фандинг</th><th class="r">Итог</th></tr></thead><tbody id="pfTrades"></tbody></table></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. СТАТИСТИКА -->
+<section class="section" id="stats">
+  <div class="sh reveal">
+    <div class="eyebrow">Сравнение агентов</div>
+    <h2>Торговая статистика <span class="nw">ИИ-агент</span>ов за выбранный период</h2>
+    <p class="lead">Выберите период и укажите свой капитал — таблица пересчитает P&amp;L каждого агента.</p>
+  </div>
+  <div class="stats reveal">
+    <div class="stats-bar">
+      <div class="seg on-blue" id="stPeriod" role="group" aria-label="Период"><button type="button" data-p="7">7Д</button><button type="button" data-p="30">30Д</button><button type="button" data-p="90" class="is-on">90Д</button></div>
+      <label class="cap">Условный капитал <span class="cap-input"><span>$</span><input id="stCap" type="text" inputmode="numeric" value="10 000" aria-label="Капитал в долларах"></span></label>
+      <span class="stats-period" id="stPeriodLabel">Условные сценарии за 90 дней</span>
+    </div>
+    <div class="stats-scroll">
+      <table>
+        <thead><tr><th>Агент / подключение</th><th>Торговый P&amp;L</th><th>Доходность</th><th>Макс. просадка</th><th>Пример графика</th></tr></thead>
+        <tbody id="stBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 7. ТАРИФЫ -->
+<section class="section" id="pricing">
+  <div class="price-head">
+    <div class="sh reveal">
+      <div class="eyebrow">Тарифы</div>
+      <h2>Тарифные планы и ценообразование <span class="nw">ИИ-агент</span>ов ArbitrageScanner
+        <button class="hint" type="button" aria-describedby="hintPop"><svg><use href="#i-lock"/></svg>Код и ключи у вас
+          <span class="hint-pop" id="hintPop" role="tooltip">Код передаётся вам по договору. Система разворачивается на вашем сервере, ключи от бирж не покидают вашу инфраструктуру, доступа к вашим средствам у нас нет. Мы поставляем код, данные и поддержку — торговые решения и распоряжение средствами остаются полностью на вашей стороне.</span>
+        </button>
+      </h2>
+      <p class="lead">Выберите своего ИИ-агента для арбитража криптовалют</p>
+    </div>
+  </div>
+
+  <div class="plans">
+    <article class="plan reveal" data-plan="scout">
+      <div class="plan-img"><img src="img/agents/scout.webp" alt="ИИ-агент Scout" loading="lazy"></div>
+      <div class="plan-body">
+        <span class="plan-no">Агент 01</span>
+        <h3 class="plan-name">Scout</h3>
+        <div class="plan-price"><b>$990</b><span>стоимость запуска</span></div>
+        <p class="plan-desc">Начальный тариф для тех, кто хочет войти в автоарбитраж с минимальным бюджетом. Функционал ограничен: две биржи и одна стратегия. Система работает круглосуточно на данных нашего API, риски настраиваем под ваш депозит, помогаем развернуть всё на вашем сервере. Подойдёт, чтобы посмотреть, как автоарбитраж ведёт себя на реальных деньгах, и уже потом решать, расширять систему или нет.</p>
+        <p class="plan-fit"><b>Кому подходит:</b> Тем, кто хочет начать с минимального бюджета. Трейдерам с небольшим депозитом и всем, кто предпочитает сначала убедиться в результате, а потом вкладываться дальше.</p>
+        <button class="plan-more" type="button">Подробнее о тарифе →</button>
+        <ul class="plan-feats">
+          <li><span>Подключение к биржам</span><b>2</b></li>
+          <li><span>Стратегий арбитража<small>спот + спот</small></span><b>1</b></li>
+          <li><span>Работа</span><b>24/7</b></li>
+          <li><span>Доступ к API</span><b>2 месяца</b></li>
+          <li><span>Дашборд PNL</span><b class="yes">✓</b></li>
+          <li><span>История сделок</span><b class="yes">✓</b></li>
+          <li><span>Настройка рисков под депозит</span><b class="yes">✓</b></li>
+          <li><span>Онбординг</span><b class="yes">✓</b></li>
+          <li><span>Поддержка</span><b>1 месяц</b></li>
+          <li><span>Развёртка на вашем сервере<small>помогаем развернуть</small></span><b class="yes">✓</b></li>
+          <li><span>Срок запуска</span><b>7 дней</b></li>
+        </ul>
+        <a class="btn btn-ghost btn-block" href="https://t.me/arbitrage_scanner_support_bot" target="_blank" rel="noopener">Обсудить запуск</a>
+      </div>
+    </article>
+
+    <article class="plan reveal" data-plan="vector">
+      <div class="plan-img"><img src="img/agents/vector.webp" alt="ИИ-агент Vector" loading="lazy"></div>
+      <div class="plan-body">
+        <span class="plan-no">Агент 02</span>
+        <h3 class="plan-name">Vector</h3>
+        <div class="plan-price"><b>$2 990</b><span>стоимость запуска</span></div>
+        <p class="plan-desc">Готовая система автоарбитража, развёрнутая на вашем сервере. Код мы передаём вам по договору, ключи от бирж остаются у вас, доступа к вашим средствам нет ни у кого. Бот работает круглосуточно на данных нашего API — подключения к биржам, обработку цен и расчёт связок поддерживаем мы, вам остаётся смотреть в дашборд. Настраиваем риски под размер вашего депозита и проводим онбординг, пока вы не начнёте уверенно управлять системой сами.</p>
+        <p class="plan-fit"><b>Кому подходит:</b> Тем, кто хочет проверить автоарбитраж в деле с понятным бюджетом. Трейдерам, которые устали искать связки руками, и тем, кто пробует направление до серьёзных вложений.</p>
+        <button class="plan-more" type="button">Подробнее о тарифе →</button>
+        <ul class="plan-feats">
+          <li><span>Подключение к биржам</span><b>6</b></li>
+          <li><span>Стратегий арбитража<small>спот + спот или спот + фьючерс</small></span><b>1</b></li>
+          <li><span>Работа</span><b>24/7</b></li>
+          <li><span>Доступ к API</span><b>3 месяца</b></li>
+          <li><span>Дашборд PNL</span><b class="yes">✓</b></li>
+          <li><span>История сделок</span><b class="yes">✓</b></li>
+          <li><span>Отчётность</span><b class="yes">✓</b></li>
+          <li><span>Настройка рисков под депозит</span><b class="yes">✓</b></li>
+          <li><span>VIP-онбординг</span><b class="yes">✓</b></li>
+          <li><span>Поддержка</span><b>2 месяца</b></li>
+          <li><span>Разворачиваем на вашем сервере</span><b class="yes">✓</b></li>
+          <li><span>Срок запуска</span><b>7 дней</b></li>
+        </ul>
+        <a class="btn btn-ghost btn-block" href="https://t.me/arbitrage_scanner_support_bot" target="_blank" rel="noopener">Обсудить запуск</a>
+      </div>
+    </article>
+
+    <article class="plan is-featured reveal" data-plan="nexus">
+      <div class="plan-img"><span class="plan-flag">Популярный</span><img src="img/agents/nexus.webp" alt="ИИ-агент Nexus" loading="lazy"></div>
+      <div class="plan-body">
+        <span class="plan-no">Агент 03</span>
+        <h3 class="plan-name">Nexus</h3>
+        <div class="plan-price"><b>$4 990</b><span>стоимость запуска</span></div>
+        <p class="plan-desc">Всё из Vector плюс расширение охвата: десять бирж вместо шести, две стратегии вместо одной. Бот работает до пяти пар одновременно, то есть не простаивает, пока ждёт связку по одной монете. Доступ к API на полгода — этого хватает, чтобы система вышла на стабильный результат, а не только запустилась.</p>
+        <p class="plan-fit"><b>Кому подходит:</b> Тем, у кого уже есть понимание рынка и капитал, который простаивает. Если на шести биржах связок не хватает, а одна стратегия упирается в лимиты — это следующий шаг.</p>
+        <button class="plan-more" type="button">Подробнее о тарифе →</button>
+        <ul class="plan-feats">
+          <li class="inh"><span>Всё из Vector</span><b class="yes">✓</b></li>
+          <li><span>Подключение к биржам</span><b>10</b></li>
+          <li><span>Стратегий арбитража<small>на выбор</small></span><b>2</b></li>
+          <li><span>Торговых пар одновременно</span><b>до 5</b></li>
+          <li><span>Доступ к API</span><b>6 месяцев</b></li>
+          <li><span>Поддержка<small>приоритетная</small></span><b>4 месяца</b></li>
+          <li><span>Срок запуска</span><b>7 дней</b></li>
+        </ul>
+        <a class="btn btn-primary btn-block" href="https://t.me/arbitrage_scanner_support_bot" target="_blank" rel="noopener">Обсудить запуск</a>
+      </div>
+    </article>
+
+    <article class="plan reveal" data-plan="atlas">
+      <div class="plan-img"><img src="img/agents/atlas.webp" alt="ИИ-агент Atlas" loading="lazy"></div>
+      <div class="plan-body">
+        <span class="plan-no">Агент 04</span>
+        <h3 class="plan-name">Atlas</h3>
+        <div class="plan-price"><b>$9 990</b><span>стоимость запуска</span></div>
+        <p class="plan-desc">Здесь заканчиваются готовые конфигурации и начинается настройка под вас. Пять стратегий, неограниченное количество пар, параметры каждой стратегии подстраиваем под ваш капитал, риск-профиль и биржи. Добавляются автоматический ребаланс и страховой стоп-лосс — система сама перераспределяет средства между площадками и защищает депозит в нестандартных ситуациях. Телеграм-бот присылает алерты, поэтому вы в курсе происходящего, даже когда не смотрите в дашборд. API на год.</p>
+        <p class="plan-fit"><b>Кому подходит:</b> Тем, у кого арбитраж — основной источник дохода, а не эксперимент. Крупным частным трейдерам и небольшим командам с капиталом, для которого важны и охват, и защита.</p>
+        <button class="plan-more" type="button">Подробнее о тарифе →</button>
+        <ul class="plan-feats">
+          <li class="inh"><span>Всё из Nexus</span><b class="yes">✓</b></li>
+          <li><span>Стратегий арбитража</span><b>5</b></li>
+          <li><span>Торговых пар</span><b>без ограничений</b></li>
+          <li><span>Доступ к API</span><b>1 год</b></li>
+          <li><span>Авто-ребаланс</span><b class="yes">✓</b></li>
+          <li><span>Страховой стоп-лосс</span><b class="yes">✓</b></li>
+          <li><span>Телеграм-бот с алертами</span><b class="yes">✓</b></li>
+          <li><span>Кастомизация параметров</span><b class="yes">✓</b></li>
+          <li><span>Поддержка<small>приоритетная</small></span><b>6 месяцев</b></li>
+          <li><span>Срок запуска</span><b>7 дней</b></li>
+        </ul>
+        <a class="btn btn-ghost btn-block" href="https://t.me/arbitrage_scanner_support_bot" target="_blank" rel="noopener">Обсудить запуск</a>
+      </div>
+    </article>
+  </div>
+
+  <article class="elite reveal" data-plan="elite">
+    <div class="elite-bg" aria-hidden="true"></div>
+    <div class="elite-left">
+      <span class="elite-flag"><svg><use href="#i-crown"/></svg>VIP · ELITE</span>
+      <h3>Elite</h3>
+      <p class="elite-sub">Вся команда агентов + стратегия под вас</p>
+      <div class="elite-price">$29 990</div>
+      <small>стоимость запуска · запуск за 7 дней</small>
+      <div class="elite-avatars" aria-hidden="true"><img src="img/agents/scout-sm.webp" alt=""><img src="img/agents/vector-sm.webp" alt=""><img src="img/agents/nexus-sm.webp" alt=""><img src="img/agents/atlas-sm.webp" alt=""><span>+1</span></div>
+      <a class="btn btn-gold btn-block" href="https://t.me/arbitrage_scanner_support_bot" target="_blank" rel="noopener">Обсудить проект</a>
+    </div>
+    <div class="elite-right">
+      <p>Полноценная система под ваш бизнес, а не бот на сервере. Мы разрабатываем для вас индивидуальную стратегию, собираем персональный дашборд под неё, выносим всё на выделенный сервер и разворачиваем на вашем домене. Как только у нас появляется новая стратегия — код передаём вам сразу, без доплат. За проектом закреплён персональный менеджер, поддержка круглосуточная, доступ к API на два года по максимальному тарифу. Вы получаете не инструмент, а работающую инфраструктуру с командой за ней.</p>
+      <p class="elite-fit"><b>Кому подходит:</b> компаниям, фондам и трейдерам с большим капиталом. Тем, кому нужен не бот, а система, которую можно масштабировать и на которую можно опереться в бизнесе.</p>
+      <ul class="elite-feats">
+        <li><svg><use href="#i-check"/></svg><span>Всё из Atlas</span></li>
+        <li><svg><use href="#i-check"/></svg><span>Разработка кастомной стратегии</span></li>
+        <li><svg><use href="#i-check"/></svg><span>Новые стратегии — <small>передаём сразу, без доплат</small></span></li>
+        <li><svg><use href="#i-check"/></svg><span>Доступ к API — <small>2 года, максимальный тариф</small></span></li>
+        <li><svg><use href="#i-check"/></svg><span>Индивидуальный дашборд — <small>под ваши стратегии</small></span></li>
+        <li><svg><use href="#i-check"/></svg><span>Выделенный сервер / VPS</span></li>
+        <li><svg><use href="#i-check"/></svg><span>Отдельный домен</span></li>
+        <li><svg><use href="#i-check"/></svg><span>Персональный менеджер</span></li>
+        <li><svg><use href="#i-check"/></svg><span>Поддержка — <small>12 месяцев, 24/7</small></span></li>
+        <li><svg><use href="#i-check"/></svg><span>Срок запуска — <small>7 дней</small></span></li>
+      </ul>
+    </div>
+  </article>
+</section>
+
+<!-- 8. СРАВНЕНИЕ ТАРИФОВ -->
+<section class="section" id="compare">
+  <div class="sh reveal">
+    <div class="eyebrow">Сравнение</div>
+    <h2>Сравнение тарифов</h2>
+    <p class="lead">Все тарифы включают готовый код в вашей собственности, работу 24/7 и доступ к нашему API. Отличаются охват бирж, набор стратегий и глубина сопровождения.</p>
+  </div>
+  <div class="compare is-collapsed reveal" id="compare-box">
+    <div class="compare-scroll"><table class="cmp" id="cmpTable"></table></div>
+    <div class="compare-more"><button class="btn btn-ghost" id="cmpToggle" type="button" aria-expanded="false"><span>Показать полное сравнение</span><svg><use href="#i-chev"/></svg></button></div>
+  </div>
+</section>
+
+<!-- 10. СТРАТЕГИИ -->
+<section class="section" id="strategies">
+  <div class="sh center reveal">
+    <div class="eyebrow">Стратегии и кейсы</div>
+    <h2>Какие бывают стратегии в арбитраже?</h2>
+    <p class="lead">Все схемы ниже — дельта-нейтральные: вы не ставите на рост или падение монеты, а зарабатываете на разнице цен и выплатах фандинга.</p>
+  </div>
+  <div class="strat reveal">
+    <div class="strat-tabs" role="tablist" aria-label="Стратегии">
+      <button class="strat-tab is-on" type="button" role="tab" aria-selected="true" data-s="0"><span>01</span><b>Спот + фьючерс</b><small>курсовой спред</small></button>
+      <button class="strat-tab" type="button" role="tab" aria-selected="false" data-s="1"><span>02</span><b>Фьючерс + фьючерс</b><small>спред между биржами</small></button>
+      <button class="strat-tab" type="button" role="tab" aria-selected="false" data-s="2"><span>03</span><b>Только фандинг</b><small>выплаты каждые 8 часов</small></button>
+      <button class="strat-tab" type="button" role="tab" aria-selected="false" data-s="3"><span>04</span><b>Фьючерс + спот</b><small>по вашим токенам</small></button>
+    </div>
+
+    <div class="strat-panels">
+      <div class="strat-panel" data-s="0" role="tabpanel">
+        <div class="sp-text">
+          <h3>Спот + фьючерс: курсовой спред</h3>
+          <p>Одна и та же монета на споте и во фьючерсах стоит по-разному — фьючерс уходит то выше, то ниже спота. Бот ловит момент, когда разрыв становится достаточно большим: покупает на споте и одновременно открывает шорт по фьючерсу того же объёма.</p>
+          <p>Позиция получается дельта-нейтральной: куда бы монета ни пошла дальше, вы не в убытке, потому что одна сторона компенсирует другую. Прибыль фиксируется, когда цены сходятся, — бот закрывает обе позиции и забирает спред.</p>
+          <div class="tags"><span class="tag">дельта-нейтрально</span><span class="tag">одна биржа или две</span><span class="tag blue">доступно с тарифа Vector</span></div>
+          <a class="btn btn-primary" href="https://t.me/arbitrage_scanner_support_bot" target="_blank" rel="noopener">Обсудить стратегию</a>
+        </div>
+        <div class="sp-case">
+          <span class="sp-case-h">Кейс клиента</span>
+          <p>На споте бот купил SUNDOG, а на фьючерсах одновременно открыл short на такое же количество монет. После схождения цен обе позиции закрылись. Фьючерсная позиция дала +$569.70, спотовая −$121.38.</p>
+          <div class="sp-shots">
+            <button class="shot" type="button" data-full="img/cases/sundog-futures.webp?v=2" data-cap="Фьючерсы: SUNDOGUSDT Perpetual, шорт закрыт в +569.7 USDT"><img src="img/cases/sundog-futures.webp?v=2" alt="Скриншот: фьючерсная позиция SUNDOG +569.7 USDT" loading="lazy"><span>Увеличить</span></button>
+            <button class="shot" type="button" data-full="img/cases/sundog-spot.webp" data-cap="Спот: PnL −121.38 USD"><img src="img/cases/sundog-spot.webp" alt="Скриншот: спотовый счёт, PnL −121.38 USD" loading="lazy" style="max-height:none"><span>Увеличить</span></button>
+          </div>
+          <div class="sp-result"><div><b>+$448.32</b><small>чистая прибыль по связке</small></div><div class="sp-legs"><span class="pos">фьючерс +$569.70</span><span class="neg">спот −$121.38</span></div></div>
+        </div>
+      </div>
+
+      <div class="strat-panel" data-s="1" role="tabpanel" hidden>
+        <div class="sp-text">
+          <h3>Фьючерс + фьючерс: курсовой спред между биржами</h3>
+          <p>Один и тот же фьючерсный контракт на разных биржах торгуется по разным ценам — где-то дороже, где-то дешевле. Бот открывает лонг там, где цена ниже, и шорт там, где выше, одинаковым объёмом.</p>
+          <p>Опять дельта-нейтрально: движение рынка вам безразлично, вы зарабатываете на сближении цен между площадками.</p>
+          <div class="tags"><span class="tag">дельта-нейтрально</span><span class="tag">две биржи</span><span class="tag blue">доступно с тарифа Nexus</span></div>
+          <a class="btn btn-primary" href="https://t.me/arbitrage_scanner_support_bot" target="_blank" rel="noopener">Обсудить стратегию</a>
+        </div>
+        <div class="sp-case">
+          <span class="sp-case-h">Кейс клиента</span>
+          <p>На первой бирже открыли short там, где ARIA стоила дороже. На второй бирже одновременно открыли long по более низкой цене. После сокращения спреда обе позиции закрылись. Short принёс +$7 900.48, long показал −$6 143.73.</p>
+          <div class="sp-shots">
+            <button class="shot" type="button" data-full="img/cases/aria-short.webp" data-cap="Биржа 1: шорт ARIAUSDT, Realized PnL +7 900.48 USDT"><img src="img/cases/aria-short.webp" alt="Скриншот: шорт ARIAUSDT +7900.48 USDT" loading="lazy" style="max-height:200px"><span>Увеличить</span></button>
+            <button class="shot" type="button" data-full="img/cases/aria-long.webp" data-cap="Биржа 2: лонг ARIAUSDT, Realized PnL −6 143.73 USDT"><img src="img/cases/aria-long.webp" alt="Скриншот: лонг ARIAUSDT −6143.73 USDT" loading="lazy"><span>Увеличить</span></button>
+          </div>
+          <div class="sp-result"><div><b>+$1 756.75</b><small>разница по двум ногам</small></div><div class="sp-legs"><span class="pos">шорт +$7 900.48</span><span class="neg">лонг −$6 143.73</span></div></div>
+        </div>
+      </div>
+
+      <div class="strat-panel" data-s="2" role="tabpanel" hidden>
+        <div class="sp-text">
+          <h3>Только фандинг: спот + фьючерс и фьючерс + фьючерс</h3>
+          <p>Раз в несколько часов биржа списывает или начисляет ставку финансирования — по сути плату между лонгами и шортами. Если ставка положительная, шорты получают деньги от лонгов, и наоборот. Бот собирает позицию так, чтобы в итоге вы оказались в прибыли.</p>
+          <p>Например, покупает спот и шортит фьючерс, где ставка положительная. Позиция дельта-нейтральна, движение цены вас не касается — вам просто капает выплата каждые несколько часов. Второй вариант — держать противоположные позиции на двух биржах, где ставки различаются, и забирать разницу.</p>
+          <div class="tags"><span class="tag">дельта-нейтрально</span><span class="tag">регулярные выплаты</span><span class="tag blue">доступно с тарифа Nexus</span></div>
+          <a class="btn btn-primary" href="https://t.me/arbitrage_scanner_support_bot" target="_blank" rel="noopener">Обсудить стратегию</a>
+        </div>
+        <div class="sp-case">
+          <span class="sp-case-h">Кейс клиента</span>
+          <p>Монету держали на споте, а на фьючерсах открыли противоположную позицию на сопоставимый объём. Движение цены одной позиции компенсировалось второй. Доход сформировали регулярные выплаты фандинга.</p>
+          <div class="sp-shots">
+            <button class="shot" type="button" data-full="img/cases/funding.webp" data-cap="Фьючерсные позиции и спотовый счёт клиента по стратегии фандинга"><img src="img/cases/funding.webp" alt="Скриншот: позиции по стратегии фандинга" loading="lazy" style="max-height:300px"><span>Увеличить</span></button>
+          </div>
+          <div class="sp-result"><div><b>+40%</b><small>за 30 дней по стратегии арбитража фандинга</small></div></div>
+        </div>
+      </div>
+
+      <div class="strat-panel" data-s="3" role="tabpanel" hidden>
+        <div class="sp-text">
+          <h3>Арбитраж по своим токенам: фьючерс + спот</h3>
+          <p>Представим, у вас есть сотня монет, которые лежат без дела. Процент на стейкинге небольшой, а переводить их в какие-то пулы рискованно. При этом на рынке часто появляется разница между фьючерсами и спотом — и доходность здесь можно получать за счёт продажи на споте и заработка на фандинге, если он отрицательный.</p>
+          <p>Всё просто: бот продаёт токены по лучшему курсу и открывает лонг на ту же сумму — вы получаете фандинг. После этого вы откупаете свои монеты, а чистая прибыль равна полученному фандингу. Бот настраивается под конкретный список монет — обычно те, что вы уже держите или хорошо знаете. Он не мечется по всему рынку, а ждёт нужного момента именно в вашем списке.</p>
+          <div class="tags"><span class="tag">ваши монеты</span><span class="tag">отрицательный фандинг</span><span class="tag blue">доступно с тарифа Atlas</span></div>
+          <a class="btn btn-primary" href="https://t.me/arbitrage_scanner_support_bot" target="_blank" rel="noopener">Обсудить стратегию</a>
+        </div>
+        <div class="sp-case">
+          <span class="sp-case-h">Как это работает</span>
+          <div class="scheme">
+            <div>Бот продаёт ваши токены на споте по лучшему курсу</div>
+            <div>Одновременно открывает лонг по фьючерсу на ту же сумму — позиция дельта-нейтральна</div>
+            <div>Пока фандинг отрицательный, лонги получают выплаты каждые несколько часов</div>
+            <div>Бот откупает токены на споте и закрывает лонг: монеты снова у вас, а фандинг — чистая прибыль</div>
+          </div>
+          <div class="sp-result"><div><b>Монеты + фандинг</b><small>количество токенов сохраняется, доход — выплаты</small></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11. ОТЗЫВЫ -->
+<section class="section" id="reviews">
+  <div class="sh center reveal">
+    <div class="eyebrow">Клиенты</div>
+    <h2>Отзывы и кейсы клиентов сервиса</h2>
+    <p class="lead">Разные капиталы, разные тарифы, разные задачи. Общее — система работает без них.</p>
+  </div>
+  <div class="reviews">
+    <article class="review reveal">
+      <div class="stars" aria-label="5 из 5"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div>
+      <blockquote>Три года торговал арбитраж вручную. Каждый день по 12 часов в мониторе, и всё равно половину связок пропускал — спред закрывается за секунды, а я в этот момент кофе наливаю. Начали с двух бирж, посмотрел месяц, потом расширили до шести. Главное даже не деньги, а что я перестал жить в терминале и освободил время для себя и для семьи.</blockquote>
+      <div class="rv-stats"><div><b>$7 000</b><small>капитал в работе</small></div><div><b>178</b><small>сделок в месяц</small></div><div><b>12 ч</b><small>освободилось в день</small></div></div>
+      <div class="rv-who"><span class="rv-ava">СМ</span><div><b>Сергей М.</b><small>частный трейдер</small></div><span class="rv-plan">Vector</span></div>
+    </article>
+    <article class="review reveal">
+      <div class="stars" aria-label="5 из 5"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div>
+      <blockquote>Пытался сделать своего бота два месяца — в итоге не получилось, и решил взять готовое решение. Понравилось, что тут поддержка 24/7 и никто не имеет доступ к моему балансу, всё на моём сервере. Очень понравилась поддержка, которую оказывают на всех этапах, и самое главное — что бот рабочий.</blockquote>
+      <div class="rv-stats"><div><b>$16 000</b><small>капитал в работе</small></div><div><b>338</b><small>сделок в месяц</small></div><div><b>3 ч</b><small>освободилось в день</small></div></div>
+      <div class="rv-who"><span class="rv-ava">ИЛ</span><div><b>Игорь Л.</b><small>арбитражник</small></div><span class="rv-plan">Nexus</span></div>
+    </article>
+    <article class="review reveal">
+      <div class="stars" aria-label="5 из 5"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div>
+      <blockquote>Я в коде не понимаю ничего. Больше всего боялся, что мне отдадут архив и скажут «разбирайся». Оказалось наоборот: развернули всё на моём сервере вместе со мной, показали, где что нажимать, отвечали на мои глупые вопросы. Сейчас сам меняю настройки, не боюсь туда лезть, и заработок идёт стабильно.</blockquote>
+      <div class="rv-stats"><div><b>$11 000</b><small>капитал в работе</small></div><div><b>194</b><small>сделок в месяц</small></div><div><b>4 ч</b><small>освободилось в день</small></div></div>
+      <div class="rv-who"><span class="rv-ava">АВ</span><div><b>Алексей В.</b><small>частный инвестор</small></div><span class="rv-plan">Vector</span></div>
+    </article>
+    <article class="review reveal">
+      <div class="stars" aria-label="5 из 5"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div>
+      <blockquote>У нас небольшая команда, и арбитраж — одна из стратегий в портфеле. Вопрос был не в цене, а в надёжности и в том, с кем разговаривать, когда что-то идёт не так. Здесь код у нас, ключи у нас, доступа к деньгам нет ни у кого. За два месяца — ноль нештатных ситуаций и 7% прироста к тестовому депозиту, который мы выделили на это направление. Стратегия консервативная, с минимальным риском.</blockquote>
+      <div class="rv-stats"><div><b>$50 000</b><small>капитал в работе</small></div><div><b>74</b><small>сделок в месяц</small></div><div><b>9 ч</b><small>освободилось в день</small></div></div>
+      <div class="rv-who"><span class="rv-ava">ПН</span><div><b>Павел Н.</b><small>инвестиционная команда</small></div><span class="rv-plan">Atlas</span></div>
+    </article>
+  </div>
+</section>
+
+<!-- 12. FAQ -->
+<section class="section" id="faq">
+  <div class="sh center reveal">
+    <div class="eyebrow">Вопросы</div>
+    <h2>Частые вопросы</h2>
+  </div>
+  <div class="faq reveal">
+    <details open><summary><span>01</span>Вы получаете доступ к моим деньгам?<i><svg><use href="#i-chev"/></svg></i></summary><div class="ans">Нет. Код разворачивается на вашем сервере, ключи от бирж остаются у вас и никуда не передаются. У нас нет доступа ни к вашим аккаунтам, ни к балансу, ни к выводу средств. Мы поставляем код, данные и поддержку — распоряжаетесь деньгами только вы.</div></details>
+    <details><summary><span>02</span>Сколько я заработаю?<i><svg><use href="#i-chev"/></svg></i></summary><div class="ans">Честный ответ: никто этого не гарантирует, и любой, кто называет вам конкретный процент, продаёт вам сказку. Доходность зависит от капитала, выбранных бирж, стратегии и состояния рынка — в спокойные периоды спредов меньше, в волатильные больше.</div></details>
+    <details><summary><span>03</span>Я вообще не разбираюсь в коде. Справлюсь?<i><svg><use href="#i-chev"/></svg></i></summary><div class="ans">Да. Мы разворачиваем систему вместе с вами и показываем, как всё устроено: где смотреть результаты, как менять настройки, что делать в нестандартных ситуациях. Онбординг идёт до момента, когда вы уверенно управляете этим сами, а не до момента, когда файлы легли на сервер. Дальше остаётся поддержка — от месяца на Scout до года на Elite.</div></details>
+    <details><summary><span>04</span>Что будет, когда закончится доступ к API?<i><svg><use href="#i-chev"/></svg></i></summary><div class="ans">Система работает на нашем потоке данных, поэтому после окончания оплаченного периода доступ нужно продлить — иначе бот останется без цен и связок. Стоимость продления зависит от тарифа и обсуждается заранее, никаких сюрпризов. Мы говорим об этом прямо на первом созвоне, чтобы вы считали экономику на год вперёд, а не узнавали через три месяца.</div></details>
+    <details><summary><span>05</span>Какой минимальный капитал нужен?<i><svg><use href="#i-chev"/></svg></i></summary><div class="ans">Зависит от стратегии, но минимально — от $1 000. Для схем внутри одной биржи порог ниже, потому что не нужно держать деньги на нескольких площадках сразу. Для межбиржевых стратегий капитал приходится распределять, и требования выше. На созвоне посчитаем под вашу сумму и, если её объективно не хватает для внятного результата, скажем сразу, а не после оплаты.</div></details>
+    <details><summary><span>06</span>Сколько времени займёт запуск?<i><svg><use href="#i-chev"/></svg></i></summary><div class="ans">От оплаты до работающей системы — 7 рабочих дней. Больше всего времени уходит не на сборку, а на согласование стратегии и настройку рисков: это та часть, где нельзя торопиться, потому что от неё зависит, как система поведёт себя на ваших деньгах.</div></details>
+    <details><summary><span>07</span>Насколько это рискованно?<i><svg><use href="#i-chev"/></svg></i></summary><div class="ans">Арбитраж считается одной из более консервативных схем, потому что позиции чаще всего дельта-нейтральные: вы не ставите на рост или падение монеты, а зарабатываете на разнице цен. Но безрискового в крипте не бывает — есть комиссии, задержки переводов, сбои бирж, зависшие ноги сделок. Поэтому на тарифах Atlas и Elite есть страховой стоп-лосс и авто-ребаланс, а риски мы настраиваем под ваш депозит до запуска, а не после первой проблемы.</div></details>
+    <details><summary><span>08</span>А если рынок успокоится и спредов не будет?<i><svg><use href="#i-chev"/></svg></i></summary><div class="ans">Спреды не исчезают полностью — они сужаются. Именно поэтому в тарифах от Nexus доступно несколько стратегий: когда курсовые спреды сжимаются, работает фандинг, когда сжимается и он, помогает расширение по биржам и парам. Система, настроенная на одну схему, в такие периоды простаивает — настроенная на несколько, продолжает работать.</div></details>
+    <details><summary><span>09</span>Могу я потом сам менять настройки?<i><svg><use href="#i-chev"/></svg></i></summary><div class="ans">Да, код ваш. На тарифах от Atlas параметры стратегии настраиваются под вас и дальше меняются вами. Если захотите передать код своему разработчику или доработать его — никаких ограничений нет.</div></details>
+    <details><summary><span>10</span>Что если что-то сломается?<i><svg><use href="#i-chev"/></svg></i></summary><div class="ans">Пишете нам. Поддержка входит в каждый тариф, начиная с Vector она приоритетная, на Elite — круглосуточная с персональным менеджером. Отдельно: если проблема на стороне данных или бирж, это чинится у нас, и вам ничего делать не нужно.</div></details>
+    <details><summary><span>11</span>Можно посмотреть, как работает система, до покупки?<i><svg><use href="#i-chev"/></svg></i></summary><div class="ans">На созвоне показываем дашборд и разбираем реальные примеры сделок. Плюс до решения о покупке вы можете взять доступ к нашему API отдельно и посмотреть на связки своими глазами — понять, что данные живые и их достаточно для вашей стратегии.</div></details>
+  </div>
+</section>
+
+<!-- 13. CTA -->
+<section class="section" id="contact">
+  <div class="cta reveal">
+    <div>
+      <div class="eyebrow">Следующий шаг</div>
+      <h2>Узнайте, как это подходит вашей торговой системе.</h2>
+      <p class="cta-lead">Расскажите, какими биржами вы пользуетесь и какой агент вас интересует. Подготовьте сообщение здесь и продолжите разговор в Telegram с нашей поддержкой.</p>
+      <ul>
+        <li><svg><use href="#i-check"/></svg>Обсудите стратегию и её ограничения</li>
+        <li><svg><use href="#i-check"/></svg>Уточните требования к запуску и подключениям</li>
+        <li><svg><use href="#i-check"/></svg>Узнайте полную стоимость под ваш капитал</li>
+      </ul>
+      <div class="cta-note"><b>Свяжитесь с нами в Telegram: <a href="https://t.me/arbitrage_scanner_support_bot" target="_blank" rel="noopener">@arbitrage_scanner_support_bot ↗</a></b><br>Подготовьте сообщение в форме, откройте чат и вставьте текст. Не указывайте в форме API-ключи, пароли или выписки со счетов.</div>
+    </div>
+    <form class="form" id="leadForm" novalidate>
+      <label>Ваше имя<input name="name" autocomplete="given-name" placeholder="Как к вам обращаться" required></label>
+      <div class="form-pair">
+        <label>Агент<select name="agent"><option>Помогите выбрать</option><option>Scout — $990</option><option>Vector — $2 990</option><option>Nexus — $4 990</option><option>Atlas — $9 990</option><option>Elite — $29 990</option></select></label>
+        <label>Страна / регион<input name="country" autocomplete="country-name" placeholder="Например, Казахстан"></label>
+      </div>
+      <label>Ваши биржи и требования к настройке<textarea name="details" placeholder="Например: Binance, Bybit, OKX. Интересует спот+фьючерс и фандинг."></textarea></label>
+      <label class="check"><input type="checkbox" name="agree" required>Я понимаю, что текст сообщения будет скопирован, и я сам отправлю его в чат с поддержкой в Telegram.</label>
+      <button class="btn btn-primary" type="submit"><svg><use href="#i-tg"/></svg>Подготовить сообщение</button>
+      <p class="form-status" id="formStatus" role="status"></p>
+      <div class="form-preview" id="formPreview">
+        <label>Проверьте сообщение<textarea id="formMsg"></textarea></label>
+        <a class="btn btn-primary" id="formOpen" href="https://t.me/arbitrage_scanner_support_bot?start=turnkey" target="_blank" rel="noopener"><svg><use href="#i-tg"/></svg>Скопировать и открыть чат</a>
+        <small class="muted">Страница ничего не отправляет и не сохраняет. Сообщение уйдёт только после того, как вы вставите его в чат и нажмёте «Отправить».</small>
+      </div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-in">
+    <img src="img/as-logo.png" alt="Arbitrage Scanner">
+    <nav class="footer-links">
+      <a href="https://s3.arbitragescanner.io/docs/privacy-policy.pdf" target="_blank" rel="noopener">Политика конфиденциальности</a>
+      <a href="https://s3.arbitragescanner.io/docs/public-offer.pdf" target="_blank" rel="noopener">Публичная оферта</a>
+      <a href="https://s3.arbitragescanner.io/docs/refund-policy.pdf" target="_blank" rel="noopener">Политика возврата</a>
+      <a href="https://arbitragescanner.io/contacts" target="_blank" rel="noopener">Контакты</a>
+    </nav>
+    <span>© 2026 ArbitrageScanner</span>
+  </div>
+</footer>
+
+<a class="tg-float" href="https://t.me/arbitrage_scanner_support_bot" target="_blank" rel="noopener" aria-label="Написать в поддержку в Telegram"><svg><use href="#i-tg"/></svg><span>Написать в поддержку</span></a>
+
+<!-- Модалка тарифа -->
+<div class="modal" id="planModal" aria-hidden="true">
+  <div class="modal-scrim" data-close></div>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="mpName">
+    <button class="modal-close" type="button" data-close aria-label="Закрыть"><svg><use href="#i-close"/></svg></button>
+    <div class="mp-top"><img id="mpImg" src="" alt=""><div class="mp-head"><span class="plan-no" id="mpNo"></span><h3 id="mpName"></h3><div class="plan-price"><b id="mpPrice"></b><span>стоимость запуска</span></div></div></div>
+    <div class="mp-content">
+      <h4>Описание</h4><p id="mpDesc"></p>
+      <h4>Кому подходит</h4><p class="mp-fit" id="mpFit"></p>
+      <h4>Что входит</h4><ul class="mp-feats" id="mpFeats"></ul>
+      <div class="mp-cta"><a class="btn btn-primary" href="https://t.me/arbitrage_scanner_support_bot" target="_blank" rel="noopener"><svg><use href="#i-tg"/></svg>Обсудить запуск</a><a class="btn btn-ghost" href="#compare" data-close>Сравнить тарифы</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- Лайтбокс скриншотов -->
+<div class="modal lightbox" id="lightbox" aria-hidden="true">
+  <div class="modal-scrim" data-close></div>
+  <figure class="modal-box" role="dialog" aria-modal="true" aria-label="Скриншот кейса" style="margin:0">
+    <button class="modal-close" type="button" data-close aria-label="Закрыть"><svg><use href="#i-close"/></svg></button>
+    <img id="lbImg" src="" alt=""><figcaption id="lbCap"></figcaption>
+  </figure>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script src="js/data.js"></script>
+<script src="js/hero.js"></script>
+<script src="js/simulator.js"></script>
+<script src="js/profile.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
